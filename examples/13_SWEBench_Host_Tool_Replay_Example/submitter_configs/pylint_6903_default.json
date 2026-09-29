@@ -1,0 +1,15 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "pylint-6903-python",
+  "values": {
+    "python": "python3",
+    "cpu_affinity": "",
+    "numa_cpunodebind": "",
+    "numa_membind": ""
+  },
+  "runtime_details": {
+    "kind": "prepared Pylint functional-test environment",
+    "notes": "Prototype default. Full pytest replay should use a fixed local Pylint dependency environment or cache."
+  }
+}

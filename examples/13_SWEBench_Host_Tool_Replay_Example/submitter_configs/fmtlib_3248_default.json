@@ -1,0 +1,21 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "fmtlib-3248-cmake-cpp",
+  "values": {
+    "cc": "gcc",
+    "cxx": "g++",
+    "cmake": "cmake",
+    "cmake_jobs": 2,
+    "cpu_affinity": "",
+    "numa_cpunodebind": "",
+    "numa_membind": ""
+  },
+  "toolchain_details": {
+    "kind": "released-system-toolchain",
+    "compiler_family": "gcc",
+    "compiler_envelope": "gcc >=13,<17",
+    "standard_library_family": "libstdc++",
+    "notes": "Prototype default. Production submissions should disclose exact compiler, linker, libc, and OS/kernel versions."
+  }
+}

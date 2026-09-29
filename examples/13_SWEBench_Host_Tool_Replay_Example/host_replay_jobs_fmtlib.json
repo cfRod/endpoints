@@ -1,0 +1,13 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "suite_id": "fmtlib_3248_real_trajectory_poc",
+  "jobs": [
+    {
+      "job_id": "fmtlib_3248_default",
+      "trajectory": "examples/13_SWEBench_Host_Tool_Replay_Example/trajectories/fmtlib_3248/host_replay.jsonl",
+      "environment": "examples/13_SWEBench_Host_Tool_Replay_Example/environments/fmtlib_3248_git.json",
+      "submitter_config": "examples/13_SWEBench_Host_Tool_Replay_Example/submitter_configs/fmtlib_3248_default.json"
+    }
+  ]
+}

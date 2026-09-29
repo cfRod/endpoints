@@ -1,0 +1,61 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "configurable": {
+    "cpu_affinity": {
+      "default": "",
+      "description": "Optional CPU set used by the replay runner to wrap tool commands with taskset.",
+      "pattern": "|[0-9,-]+",
+      "type": "string"
+    },
+    "numa_cpunodebind": {
+      "default": "",
+      "description": "Optional NUMA CPU node binding used by the replay runner.",
+      "pattern": "|[0-9,-]+",
+      "type": "string"
+    },
+    "numa_membind": {
+      "default": "",
+      "description": "Optional NUMA memory node binding used by the replay runner.",
+      "pattern": "|[0-9,-]+",
+      "type": "string"
+    },
+    "python": {
+      "default": "python3",
+      "description": "Python interpreter used for Django replay commands. End-to-end runs should point to a prepared Django test environment.",
+      "type": "executable"
+    }
+  },
+  "environment_id": "django-16333-python",
+  "fixed": {
+    "base_commit": true,
+    "dependency_policy": "prepared Django functional-test dependency environment",
+    "network_during_replay": false,
+    "replay_commands": true,
+    "source": true,
+    "validation": true
+  },
+  "git_index": {
+    "initialize": false,
+    "reason": "Git checkout source already has a repository index."
+  },
+  "probes": [
+    "{python} --version",
+    "git --version",
+    "uname -m",
+    "uname -r"
+  ],
+  "setup": [
+    "{python} -m venv \"{work}/.host_replay_venv\"",
+    "\"{work}/.host_replay_venv/bin/python\" -m pip install --upgrade pip setuptools wheel",
+    "\"{work}/.host_replay_venv/bin/python\" -m pip install asgiref sqlparse",
+    "\"{work}/.host_replay_venv/bin/python\" -m compileall -q \"{work}/django/contrib/auth/forms.py\" \"{work}/tests/auth_tests/test_forms.py\""
+  ],
+  "setup_timeout_s": 300,
+  "source": {
+    "base_commit": "60a7bd89860e504c0c33b02c78edcac87f6d1b5a",
+    "kind": "git",
+    "repo": "django/django",
+    "repo_url": "https://github.com/django/django.git"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "pylint-6903-python",
+  "source": {
+    "kind": "git",
+    "repo": "pylint-dev/pylint",
+    "repo_url": "https://github.com/pylint-dev/pylint.git",
+    "base_commit": "ca80f03a43bc39e4cc2c67dc99817b3c9f13b8a6"
+  },
+  "fixed": {
+    "source": true,
+    "base_commit": true,
+    "replay_commands": true,
+    "validation": true,
+    "network_during_replay": false,
+    "dependency_policy": "prepared Pylint functional-test dependency environment"
+  },
+  "configurable": {
+    "python": {
+      "type": "executable",
+      "default": "python3",
+      "description": "Python interpreter used for Pylint replay commands. End-to-end runs should point to a prepared Pylint functional-test environment."
+    },
+    "cpu_affinity": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional CPU set used by the replay runner to wrap tool commands with taskset."
+    },
+    "numa_cpunodebind": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional NUMA CPU node binding used by the replay runner."
+    },
+    "numa_membind": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional NUMA memory node binding used by the replay runner."
+    }
+  },
+  "git_index": {
+    "initialize": false,
+    "reason": "Git checkout source already has a repository index."
+  },
+  "probes": [
+    "{python} --version",
+    "git --version",
+    "uname -m",
+    "uname -r"
+  ],
+  "setup": [
+    "{python} -m venv \"{work}/.host_replay_venv\"",
+    "\"{work}/.host_replay_venv/bin/python\" -m pip install --upgrade pip setuptools wheel",
+    "\"{work}/.host_replay_venv/bin/python\" -m pip install -e \"{work}\" pytest py",
+    "\"{work}/.host_replay_venv/bin/python\" -m py_compile \"{work}/pylint/lint/run.py\""
+  ],
+  "setup_timeout_s": 900
+}

@@ -1,0 +1,37 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "suite_id": "representative_host_replay_real_trajectories_poc",
+  "jobs": [
+    {
+      "job_id": "django_16333",
+      "trajectory": "examples/13_SWEBench_Host_Tool_Replay_Example/trajectories/django_16333/host_replay.jsonl",
+      "environment": "examples/13_SWEBench_Host_Tool_Replay_Example/environments/django_16333_git.json",
+      "submitter_config": "examples/13_SWEBench_Host_Tool_Replay_Example/submitter_configs/django_16333_default.json"
+    },
+    {
+      "job_id": "pylint_6903",
+      "trajectory": "examples/13_SWEBench_Host_Tool_Replay_Example/trajectories/pylint_6903/host_replay.jsonl",
+      "environment": "examples/13_SWEBench_Host_Tool_Replay_Example/environments/pylint_6903_git.json",
+      "submitter_config": "examples/13_SWEBench_Host_Tool_Replay_Example/submitter_configs/pylint_6903_default.json"
+    },
+    {
+      "job_id": "zeromicro_go_zero_964",
+      "trajectory": "examples/13_SWEBench_Host_Tool_Replay_Example/trajectories/zeromicro_go_zero_964/host_replay.jsonl",
+      "environment": "examples/13_SWEBench_Host_Tool_Replay_Example/environments/zeromicro_go_zero_964_git.json",
+      "submitter_config": "examples/13_SWEBench_Host_Tool_Replay_Example/submitter_configs/zeromicro_go_zero_964_default.json"
+    },
+    {
+      "job_id": "protobuf_7cd0b6f",
+      "trajectory": "examples/13_SWEBench_Host_Tool_Replay_Example/trajectories/protobuf_7cd0b6f/host_replay.jsonl",
+      "environment": "examples/13_SWEBench_Host_Tool_Replay_Example/environments/protobuf_7cd0b6f_git.json",
+      "submitter_config": "examples/13_SWEBench_Host_Tool_Replay_Example/submitter_configs/protobuf_7cd0b6f_make_jobs_32.json"
+    },
+    {
+      "job_id": "fmtlib_3248",
+      "trajectory": "examples/13_SWEBench_Host_Tool_Replay_Example/trajectories/fmtlib_3248/host_replay.jsonl",
+      "environment": "examples/13_SWEBench_Host_Tool_Replay_Example/environments/fmtlib_3248_git.json",
+      "submitter_config": "examples/13_SWEBench_Host_Tool_Replay_Example/submitter_configs/fmtlib_3248_default.json"
+    }
+  ]
+}

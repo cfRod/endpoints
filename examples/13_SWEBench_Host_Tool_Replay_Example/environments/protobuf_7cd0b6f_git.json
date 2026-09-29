@@ -1,0 +1,100 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "protobuf-7cd0b6f-autotools",
+  "source": {
+    "kind": "git",
+    "repo": "protocolbuffers/protobuf",
+    "repo_url": "https://github.com/protocolbuffers/protobuf.git",
+    "base_commit": "7cd0b6fbf1643943560d8a9fe553fd206190b27f"
+  },
+  "fixed": {
+    "source": true,
+    "base_commit": true,
+    "dependency_policy": "Git submodules pinned by the selected Protobuf commit; replay uses the prepared checkout",
+    "replay_commands": true,
+    "validation": true,
+    "network_during_replay": false,
+    "build_system": "autotools_make",
+    "targets": [
+      "all",
+      "src/protoc"
+    ]
+  },
+  "software_constraints": {
+    "compiler": {
+      "reference": {
+        "family": "gcc",
+        "version": "system"
+      },
+      "allowed": {
+        "gcc": ">=11,<17"
+      }
+    }
+  },
+  "configurable": {
+    "cc": {
+      "type": "executable",
+      "default": "gcc",
+      "allowed_family": "gcc",
+      "allowed_versions": ">=11,<17",
+      "description": "C compiler executable used by configure and Make. This selects a compliant GCC executable/version, not an arbitrary compiler family."
+    },
+    "cxx": {
+      "type": "executable",
+      "default": "g++",
+      "allowed_family": "gcc",
+      "allowed_versions": ">=11,<17",
+      "description": "C++ compiler executable used by configure and Make. This selects a compliant G++ executable/version, not an arbitrary compiler family."
+    },
+    "make": {
+      "type": "executable",
+      "default": "make",
+      "description": "Make executable used for build commands."
+    },
+    "make_jobs": {
+      "type": "integer",
+      "default": 32,
+      "min": 1,
+      "max": "host_logical_cpus",
+      "description": "Parallel Make jobs used by the replay build step."
+    },
+    "cpu_affinity": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional CPU set used by the replay runner to wrap tool commands with taskset."
+    },
+    "numa_cpunodebind": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional NUMA CPU node binding used by the replay runner."
+    },
+    "numa_membind": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional NUMA memory node binding used by the replay runner."
+    }
+  },
+  "probes": [
+    "{cc} --version",
+    "{cxx} --version",
+    "{make} --version",
+    "autoconf --version",
+    "automake --version",
+    "libtoolize --version",
+    "git --version",
+    "uname -m",
+    "uname -r"
+  ],
+  "setup": [
+    "git -C \"{work}\" reset --hard \"{base_commit}\"",
+    "git -C \"{work}\" clean -fdx",
+    "git -C \"{work}\" submodule update --init --recursive",
+    "cd \"{work}\" && ./autogen.sh",
+    "cd \"{work}\" && CC=\"{cc}\" CXX=\"{cxx}\" ./configure"
+  ],
+  "setup_timeout_s": 1800
+}

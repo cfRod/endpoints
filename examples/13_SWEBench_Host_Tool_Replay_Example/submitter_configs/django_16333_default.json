@@ -1,0 +1,15 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "django-16333-python",
+  "runtime_details": {
+    "kind": "prepared Django functional-test environment",
+    "notes": "Prototype default. Full replay should use a fixed local Django dependency environment or cache."
+  },
+  "values": {
+    "cpu_affinity": "",
+    "numa_cpunodebind": "",
+    "numa_membind": "",
+    "python": "python3"
+  }
+}

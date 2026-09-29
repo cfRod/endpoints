@@ -1,0 +1,20 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "protobuf-7cd0b6f-autotools",
+  "values": {
+    "cc": "gcc",
+    "cxx": "g++",
+    "make": "make",
+    "make_jobs": 16,
+    "cpu_affinity": "",
+    "numa_cpunodebind": "",
+    "numa_membind": ""
+  },
+  "toolchain_details": {
+    "kind": "released-system-toolchain",
+    "compiler_family": "gcc",
+    "compiler_envelope": "gcc >=11,<17",
+    "notes": "Experiment baseline for the build-heavy Make trajectory. Same fixed trajectory and toolchain family as the tuned run; make_jobs is the submitted build-parallelism value."
+  }
+}

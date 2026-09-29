@@ -1,0 +1,71 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "configurable": {
+    "agent_index": {
+      "default": 0,
+      "description": "Prototype slot index used to derive local test ports when needed.",
+      "max": "host_logical_cpus",
+      "min": 0,
+      "type": "integer"
+    },
+    "cpu_affinity": {
+      "default": "",
+      "description": "Optional CPU set used by the replay runner to wrap tool commands with taskset.",
+      "pattern": "|[0-9,-]+",
+      "type": "string"
+    },
+    "go": {
+      "default": ".host_replay_go/go/bin/go",
+      "description": "Go executable used during setup and replay. The PoC default is created inside the workspace during materialization.",
+      "type": "string"
+    },
+    "gofmt": {
+      "default": ".host_replay_go/go/bin/gofmt",
+      "description": "gofmt executable used by replay commands.",
+      "type": "string"
+    },
+    "numa_cpunodebind": {
+      "default": "",
+      "description": "Optional NUMA CPU node binding used by the replay runner.",
+      "pattern": "|[0-9,-]+",
+      "type": "string"
+    },
+    "numa_membind": {
+      "default": "",
+      "description": "Optional NUMA memory node binding used by the replay runner.",
+      "pattern": "|[0-9,-]+",
+      "type": "string"
+    }
+  },
+  "environment_id": "zeromicro-go-zero-964-go",
+  "fixed": {
+    "base_commit": true,
+    "dependency_policy": "workspace-local Go toolchain and prepared Go module cache or fixed dependency source",
+    "network_during_replay": false,
+    "replay_commands": true,
+    "source": true,
+    "validation": true
+  },
+  "git_index": {
+    "initialize": false,
+    "reason": "Git checkout source already has a repository index."
+  },
+  "probes": [
+    "git --version",
+    "uname -m",
+    "uname -r"
+  ],
+  "setup": [
+    "cd \"{work}\" && arch=$(uname -m); case \"$arch\" in aarch64|arm64) goarch=arm64 ;; x86_64|amd64) goarch=amd64 ;; *) echo \"unsupported Go PoC architecture: $arch\"; exit 1 ;; esac; mkdir -p .host_replay_go; curl -L \"https://go.dev/dl/go1.22.12.linux-${{goarch}}.tar.gz\" -o .host_replay_go/go.tgz; tar -C .host_replay_go -xzf .host_replay_go/go.tgz",
+    "cd \"{work}\" && \"{go}\" version",
+    "cd \"{work}\" && \"{go}\" mod download"
+  ],
+  "setup_timeout_s": 900,
+  "source": {
+    "base_commit": "68acfb1891837ec2e401588173cdd16ca1b9a9c4",
+    "kind": "git",
+    "repo": "zeromicro/go-zero",
+    "repo_url": "https://github.com/zeromicro/go-zero.git"
+  }
+}

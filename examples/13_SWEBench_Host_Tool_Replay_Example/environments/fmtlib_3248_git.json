@@ -1,0 +1,99 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "fmtlib-3248-cmake-cpp",
+  "source": {
+    "kind": "git",
+    "repo": "fmtlib/fmt",
+    "repo_url": "https://github.com/fmtlib/fmt.git",
+    "base_commit": "275b4b3417e26be3bdb5b45e16fa9af6584973a2"
+  },
+  "fixed": {
+    "source": true,
+    "base_commit": true,
+    "replay_commands": true,
+    "validation": true,
+    "network_during_replay": false,
+    "cmake_targets": [
+      "format-test",
+      "core-test"
+    ]
+  },
+  "software_constraints": {
+    "compiler": {
+      "reference": {
+        "family": "gcc",
+        "version": "system"
+      },
+      "allowed": {
+        "gcc": ">=13,<17"
+      }
+    },
+    "cxx_standard_library": {
+      "family": "libstdc++"
+    }
+  },
+  "configurable": {
+    "cc": {
+      "type": "executable",
+      "default": "gcc",
+      "allowed_family": "gcc",
+      "allowed_versions": ">=13,<17",
+      "description": "C compiler executable used during CMake configuration. This selects a compliant GCC executable/version, not an arbitrary compiler family."
+    },
+    "cxx": {
+      "type": "executable",
+      "default": "g++",
+      "allowed_family": "gcc",
+      "allowed_versions": ">=13,<17",
+      "description": "C++ compiler executable used during CMake configuration. This selects a compliant G++ executable/version, not an arbitrary compiler family."
+    },
+    "cmake": {
+      "type": "executable",
+      "default": "cmake",
+      "description": "CMake executable used for configure and build commands."
+    },
+    "cmake_jobs": {
+      "type": "integer",
+      "default": 2,
+      "min": 1,
+      "max": "host_logical_cpus",
+      "description": "Parallel CMake build jobs used by setup and replay."
+    },
+    "cpu_affinity": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional CPU set used by the replay runner to wrap tool commands with taskset."
+    },
+    "numa_cpunodebind": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional NUMA CPU node binding used by the replay runner."
+    },
+    "numa_membind": {
+      "type": "string",
+      "default": "",
+      "pattern": "|[0-9,-]+",
+      "description": "Optional NUMA memory node binding used by the replay runner."
+    }
+  },
+  "git_index": {
+    "initialize": false,
+    "reason": "Git checkout source already has a repository index."
+  },
+  "probes": [
+    "{cc} --version",
+    "{cxx} --version",
+    "{cmake} --version",
+    "git --version",
+    "uname -m",
+    "uname -r"
+  ],
+  "setup": [
+    "{cmake} -S \"{work}\" -B \"{work}/build\" -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=\"{cc}\" -DCMAKE_CXX_COMPILER=\"{cxx}\"",
+    "{cmake} --build \"{work}/build\" --target format-test core-test -j \"{cmake_jobs}\""
+  ],
+  "setup_timeout_s": 900
+}

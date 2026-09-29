@@ -1,0 +1,17 @@
+{
+  "_copyright": "SPDX-FileCopyrightText: Copyright 2026 Arm Limited and its affiliates <open-source-office@arm.com>",
+  "_license": "SPDX-License-Identifier: Apache-2.0",
+  "environment_id": "zeromicro-go-zero-964-go",
+  "runtime_details": {
+    "kind": "released-system-go-toolchain",
+    "notes": "Prototype default. Production-style runs should use fixed Go module sources or a local module cache."
+  },
+  "values": {
+    "agent_index": 0,
+    "cpu_affinity": "",
+    "go": ".host_replay_go/go/bin/go",
+    "gofmt": ".host_replay_go/go/bin/gofmt",
+    "numa_cpunodebind": "",
+    "numa_membind": ""
+  }
+}
